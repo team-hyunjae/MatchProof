@@ -64,17 +64,23 @@ English: The agency registers a request ID and time bounds. The applicant receiv
 
 English: The off-chain prover processes private inputs and returns a ZK proof. The application uses the test wallet to submit a proof-bearing transaction. Midnight verifies it and records approval. Loopback addresses may forward to another machine.
 
-## 7. 업체와 심사위원의 독립 조회 / Independent public verification
+## 7. 지갑 없이 공개 기록 조회 / Public reads without a wallet
 
-![공개 조회](diagrams/05-public-read.png)
+![체인 밖 인덱서와 Midnight의 역할 구분](diagrams/05-public-read.png)
 
-1. 인덱서는 확정된 공개 체인 상태를 조회할 수 있게 제공한다.
-2. 업체 또는 심사위원이 배포 주소로 인덱서를 조회한다.
-3. 같은 공개 요청 식별값·기한·승인 기록을 읽는다. 신청자 파일이나 지갑 연결은 필요하지 않다.
+1. Midnight가 증명 거래를 검증하고 승인 기록을 확정한다.
+2. **체인 밖 조회 서버인 인덱서**가 공개 체인 상태를 따라가며 조회할 수 있게 정리한다.
+3. 업체 또는 심사위원은 배포 주소로 인덱서를 조회해 공개 요청 식별값·기한·승인 기록을 읽는다. 신청자 파일이나 지갑 연결은 필요하지 않다.
 
-발표: “업체가 성공 여부를 임의로 만드는 구조가 아닙니다. 신청자의 자료 없이 같은 체인 기록을 읽습니다. 요청의 공개 식별값과 배포 주소를 비교하면 같은 결과인지 확인할 수 있습니다.”
+발표: “Midnight가 증명을 검증하고 승인 기록을 확정합니다. 인덱서는 그 공개 기록을 앱에서 조회하기 쉽게 제공하는 체인 밖 서버입니다. 업체는 신청자의 원본 자료 없이 승인 결과를 확인합니다.”
 
-English: The agency or judge queries the public indexer by contract address and reads the same confirmed request and approval. This public read needs neither a connected wallet nor an applicant credential. The diagram describes data flow, not a specific chain-to-indexer push API.
+English: Midnight validates the proof transaction and records approval. An off-chain indexer follows the chain and serves public state. The agency or judge reads requests and approvals by contract address without a wallet or applicant credential.
+
+**조회 범위:** 별도 조회는 신청자의 보관함에 의존하지 않는다는 뜻이다. 현재 브라우저는 설정된 인덱서 응답을 읽으며, 체인 헤더와 포함 증명을 직접 검증하는 라이트 클라이언트는 아니다. 화면의 정확성은 인덱서의 응답과 동기화 상태에 의존한다. 인덱서의 조회 데이터가 바뀌어도 실제 체인 기록이 바뀌지는 않는다.
+
+**데모 구성:** ‘공개’는 조회 대상이 공개 원장이라는 뜻이다. 데모에서는 `undeployed` 노드와 별도로 Midnight 인덱서를 실행하며, 외부 인터넷에 공개된 조회 서비스라는 뜻은 아니다. 같은 배포 주소와 공개 요청 식별값을 비교한다. 첫 화살표는 데이터의 출처를 나타내며 특정 push API를 뜻하지 않는다.
+
+English: The separate read is independent of the applicant vault, but relies on the configured indexer. The browser does not independently authenticate its response using chain headers and inclusion proofs. Public refers to the ledger data, not a publicly hosted endpoint. Compare the contract address and public request identifier. The first arrow describes data provenance, not a specific push API.
 
 ## 8. 신청자 동의 / Applicant consent
 
@@ -121,6 +127,7 @@ English: The agency or judge queries the public indexer by contract address and 
 | 미혼임을 보증하나요? / Does this prove someone has never married? | 확인 기준일에 혼인 중이 아니라는 조건만 검증합니다. / It checks only that the person was not married on the evidence check date. |
 | 실제 서류 진위를 보증하나요? / Does Midnight authenticate documents? | 발급기관의 확인을 신뢰합니다. 공공기관 연동은 없습니다. / It relies on the issuer. There is no government integration. |
 | 개인정보보호법 준수가 완료됐나요? / Is compliance established? | 수집·보관할 정보의 범위를 줄이는 설계입니다. 준수 완료를 주장하지 않습니다. / The design reduces collected data. It does not establish legal compliance. |
+| 인덱서는 온체인인가요? / Is the indexer on-chain? | 체인 밖 조회 서버입니다. Midnight가 기록을 확정하고 인덱서는 공개 상태를 조회 가능하게 제공합니다. / It is off-chain. Midnight finalizes records and the indexer serves public state. |
 | 별도 조회는 어떻게 하나요? / How can a judge verify it? | 같은 배포의 별도 업체 화면에서 지갑·자격 파일 없이 공개 인덱서를 조회합니다. / Read the same deployment through the separate agency view without a wallet or credential file. |
 
 ## 자료 근거 / Sources
@@ -129,3 +136,5 @@ English: The agency or judge queries the public indexer by contract address and 
 - 실행·역할별 UI: [한국어 시연 가이드](../docs/matchproof-judge-guide.md), [English demo guide](../docs/matchproof-judge-guide.en.md)
 - 38개 검사와 빌드: [공개 clone 기록](evidence/2026-09-26-public-clone.json). 검사 당시 커밋을 명시한다.
 - 확정 거래와 거절 검사: [9/26 개발 체인 기록](evidence/2026-09-26-matchproof-smoke.json). 과거 거래이며 현재 요청의 유효성을 보장하지 않는다.
+
+- 인덱서 정의: [Midnight 공식 용어집](https://docs.midnight.network/glossary). 실제 조회 경로: [클라이언트](../src/matchproof/client.ts), 서비스 분리: [개발 네트워크 구성](../infra/compose.yml).
