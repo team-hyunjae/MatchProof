@@ -1,0 +1,182 @@
+1
+00:00:00,300 --> 00:00:09,000
+MatchProof checks eligibility for matchmaking agencies.
+
+2
+00:00:09,000 --> 00:00:17,700
+This demo uses synthetic data on Midnight Local Devnet.
+
+3
+00:00:18,300 --> 00:00:25,433
+The issuer checks evidence and gives the applicant a
+credential.
+
+4
+00:00:25,433 --> 00:00:32,567
+The agency creates a request. The applicant consents and
+proves.
+
+5
+00:00:32,567 --> 00:00:39,700
+Midnight verifies the proof. The agency reads the
+approval.
+
+6
+00:00:40,300 --> 00:00:46,000
+The credential is bound to the applicant.
+
+7
+00:00:46,000 --> 00:00:51,700
+This issuance was confirmed before recording.
+
+8
+00:00:52,300 --> 00:00:58,100
+The applicant imports the credential into an encrypted
+vault.
+
+9
+00:00:58,100 --> 00:01:03,900
+Synthetic income: KRW 65 million in 2025.
+
+10
+00:01:03,900 --> 00:01:09,700
+The agency does not receive this credential file.
+
+11
+00:01:10,300 --> 00:01:17,150
+The agency creates DEMO-003, valid for ten minutes.
+
+12
+00:01:17,150 --> 00:01:24,000
+Policy: 2025 income of KRW 50 million or more,
+
+13
+00:01:24,000 --> 00:01:30,850
+and not married on the evidence check date.
+
+14
+00:01:30,850 --> 00:01:37,700
+Evidence must remain within seven days through the
+deadline.
+
+15
+00:01:38,300 --> 00:01:43,650
+The applicant reviews the recipient, conditions and
+deadline.
+
+16
+00:01:43,650 --> 00:01:49,000
+Exact income and original documents are not disclosed.
+
+17
+00:01:49,000 --> 00:01:54,350
+With both files imported, the proof button still needs
+consent.
+
+18
+00:01:54,350 --> 00:01:59,700
+The applicant agrees to disclose the result for this
+request.
+
+19
+00:02:00,300 --> 00:02:06,580
+Compact checks the credential, applicant key and request.
+
+20
+00:02:06,580 --> 00:02:12,860
+The off-chain prover processes private inputs.
+
+21
+00:02:12,860 --> 00:02:19,140
+The development test wallet signs automatically.
+
+22
+00:02:19,140 --> 00:02:28,000
+This take: about 24.3 seconds from click to confirmation.
+
+23
+00:02:28,000 --> 00:02:31,700
+The chain has now confirmed the proof transaction.
+
+24
+00:02:32,300 --> 00:02:38,767
+DEMO-003 now shows Conditions met.
+
+25
+00:02:38,767 --> 00:02:45,233
+Its public request ID starts with f2f55ca6.
+
+26
+00:02:45,233 --> 00:02:51,700
+The agency does not receive exact income or the
+credential.
+
+27
+00:02:52,300 --> 00:02:58,767
+A separate browser reads the same public request.
+
+28
+00:02:58,767 --> 00:03:05,233
+No connected wallet or applicant credential is needed.
+
+29
+00:03:05,233 --> 00:03:11,700
+The indexer is off-chain. The app relies on its response.
+
+30
+00:03:12,300 --> 00:03:18,100
+DEMO-002 uses a credential with KRW 30 million income.
+
+31
+00:03:18,100 --> 00:03:23,900
+The local circuit rejects it before transaction
+submission.
+
+32
+00:03:23,900 --> 00:03:29,700
+The detailed failure reason appears only to the applicant.
+
+33
+00:03:30,300 --> 00:03:34,000
+DEMO-002 remains unapproved.
+
+34
+00:03:34,000 --> 00:03:37,700
+The agency sees no detailed failure reason.
+
+35
+00:03:38,300 --> 00:03:45,433
+Ten-minute expiry limits use of the request.
+
+36
+00:03:45,433 --> 00:03:52,567
+It does not delete historical chain records.
+
+37
+00:03:52,567 --> 00:03:59,700
+The current contract has no deletion or immediate
+revocation.
+
+38
+00:04:00,300 --> 00:04:06,180
+Verified: issuance, requests, proof confirmation and
+public reads.
+
+39
+00:04:06,180 --> 00:04:12,060
+A fresh public clone passed compilation, build and 38
+tests.
+
+40
+00:04:12,060 --> 00:04:17,940
+Evidence truth relies on the issuer. No government
+integration.
+
+41
+00:04:17,940 --> 00:04:23,820
+MatchProof reduces detailed data collected by the agency.
+
+42
+00:04:23,820 --> 00:04:29,700
+Source and run instructions: github.com/team-
+hyunjae/MatchProof
