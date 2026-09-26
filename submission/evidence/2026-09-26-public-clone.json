@@ -1,7 +1,7 @@
 {
   "repository": "https://github.com/team-hyunjae/MatchProof",
-  "verifiedCommit": "df9cb78e0942b3883faf4872f5a7c9c18d5b879c",
-  "recordedAt": "2026-09-26T04:51:26.954114+00:00",
+  "verifiedCommit": "2d03b21a9f282ed7ff88cd40bccad37deb316e51",
+  "recordedAt": "2026-09-26T05:40:35.917744+00:00",
   "mode": "public-github-clone-local-execution",
   "public": true,
   "defaultBranch": "main",
@@ -26,7 +26,7 @@
     },
     "build": "passed",
     "doctor": "passed",
-    "localMarkdownLinks": 16,
+    "localMarkdownLinks": 9,
     "trackedFilesUnchangedAfterChecks": true
   },
   "warnings": [
