@@ -162,7 +162,9 @@ export default function MatchProofApp() {
       setConsent(false);
       await refresh();
       setNotice(
-        "기기의 암호화 보관함에 저장했어요. 파일은 서버로 업로드하지 않았어요.",
+        kind === "credential"
+          ? "자격증명을 보관함에 저장했어요. 심사 요청도 가져온 뒤 공개 조건을 확인해 주세요."
+          : "심사 요청을 보관함에 저장했어요. 기관의 자격증명도 있어야 조건을 증명할 수 있어요.",
       );
     });
   }
@@ -725,6 +727,13 @@ export default function MatchProofApp() {
                     {fileInput("credential", "자격증명 가져오기")}
                     {fileInput("request", "심사 요청 가져오기")}
                   </div>
+                  {joined && !details?.evidence && (
+                    <p className="mp-help" role="status">
+                      아직 자격증명을 가져오지 않았어요. 모의 검증기관에서 받은
+                      matchproof-credential.json을 ‘자격증명 가져오기’에서 선택해
+                      주세요. 업체의 심사 요청 파일과 함께 필요해요.
+                    </p>
+                  )}
                   {details?.evidence && (
                     <div className="mp-private-data">
                       <span>
@@ -828,6 +837,17 @@ export default function MatchProofApp() {
                         <ShieldCheck size={17} />
                         동의하고 조건 증명하기
                       </button>
+                      {reviewStatus(request, now) === "pending" && (
+                        <p className="mp-help" role="status">
+                          {busy
+                            ? "작업을 처리하고 있어요. 완료 안내를 기다려 주세요."
+                            : !details.evidence
+                              ? "기관의 자격증명이 없어 아직 증명할 수 없어요. 위의 ‘자격증명 가져오기’에서 matchproof-credential.json을 선택해 주세요."
+                              : !consent
+                                ? "수신 업체와 조건을 확인하고 공개에 동의하면 증명 버튼이 활성화돼요."
+                                : "자격증명과 심사 요청이 준비됐어요. 기한 안에 조건 증명을 진행해 주세요."}
+                        </p>
+                      )}
                       {reviewStatus(request, now) !== "pending" && (
                         <p className="mp-help">
                           {reviewStatus(request, now) === "expired"
