@@ -2,6 +2,7 @@
 
 - MatchProof is the selected hackathon submission as of 2026-09-26. Team 현재 has two members: GitHub users pegeaether and mjlee5929.
 - Team descriptions should list the team name and members only. Do not add individual development roles, contribution claims, or candidate-development history. Preserve factual commit authorship; listing a member does not authorize repository access grants.
+- Public repository: https://github.com/team-hyunjae/MatchProof, default branch main. The organization display name is 현재.
 - This folder is the canonical working copy. Do not edit the older ChatGPT mirror or its read-only `sources/` files as part of work here.
 - Read README.md and submission/checklist.md first. The approved MVP is matchmaking agency eligibility verification, not a complete dating application.
 - Use synthetic income/marital data and Midnight `undeployed` only. Do not silently switch to Mainnet, Preprod, or a fake success path.
