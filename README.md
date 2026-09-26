@@ -1,41 +1,43 @@
 # MatchProof
 
-결혼정보업체가 원본 소득·혼인 서류를 보관하지 않고, 신청자가 동의한 가입 조건의 충족 여부를 확인하는 Midnight DApp입니다.
+[English](README.md) · [한국어](README.ko.md)
 
-**팀 현재** · [pegeaether](https://github.com/pegeaether) · [mjlee5929](https://github.com/mjlee5929)
+A Midnight DApp for marriage matchmaking agencies to verify applicant-approved eligibility conditions without collecting copies of income or marital-status documents.
 
-> Midnight Local Devnet (`undeployed`)에서 가상 자료로 실행하는 시연 앱입니다.
+**Team 현재** · [pegeaether](https://github.com/pegeaether) · [mjlee5929](https://github.com/mjlee5929)
 
-## 해결하려는 문제
+> A working prototype using synthetic data on Midnight Local Devnet (`undeployed`). The application interface is in Korean. The [English demo guide](docs/matchproof-judge-guide.en.md) maps its buttons to English.
 
-가입 심사에 필요한 조건을 확인하기 위해 정확한 소득액과 혼인 관련 서류 사본까지 반복해서 제출·보관해야 하는 부담을 줄입니다. 검증기관이 확인한 자료를 신청자가 보관하고, 업체에는 동의한 조건의 충족 결과를 전달합니다.
+## The problem
 
-데모에서 확인하는 조건은 **2025년 연간 소득 5,000만 원 이상**, **자료 확인 기준일에 혼인 중이 아님**, **확인 자료의 최신성 7일 이내**입니다. 실제 업체의 가입 기준을 의미하지 않습니다.
+Checking admission requirements can lead agencies to collect and retain detailed documents when they only need to establish whether an applicant meets specific conditions. MatchProof separates the issuer's evidence check from the agency's eligibility check. The applicant holds an issued credential and consents to proving the requested conditions.
 
-## 시연 흐름
+The demonstration policy requires **2025 annual income of at least KRW 50,000,000**, **not being married on the evidence check date**, and **evidence no older than seven days through the request deadline**. These are synthetic demo criteria, not a real agency's admission policy.
 
-| 순서 | 역할 | 수행하는 일 |
+## Demo flow
+
+| Step | Role | Action |
 | --- | --- | --- |
-| 준비 | 업체·모의 검증기관·신청자 | 업체 등록값으로 계약을 배포하고, 같은 배포에 연결한 신청자의 등록값 준비 |
-| 1 | 모의 검증기관 | 가상 소득·혼인 자료를 확인하고 신청자 키에 연결된 자격 발급 |
-| 2 | 신청자 | 자격 파일을 가져와 기기의 암호화 보관함에 저장 |
-| 3 | 업체 | 신청자에게 10분 동안 유효한 심사 요청 발급 |
-| 4 | 신청자 | 수신 업체·조건·공개 범위를 확인하고 동의한 뒤 ZK 증명 제출 |
-| 5 | 업체·심사위원 | 신청자 파일이나 지갑 연결 없이 공개 인덱서에서 확정 결과 조회 |
+| Setup | Agency, mock issuer, applicant | Deploy a contract with the agency's registration value, then connect the applicant to that deployment. |
+| 1 | Mock issuer | Check synthetic evidence and issue a credential bound to the applicant's key. |
+| 2 | Applicant | Import the credential into an encrypted browser vault. |
+| 3 | Agency | Create a review request valid for ten minutes. |
+| 4 | Applicant | Review the recipient, conditions, public disclosure and deadline, then consent and submit a ZK proof. |
+| 5 | Agency or judge | Read the confirmed result from the public indexer without the applicant's credential file or a connected wallet. |
 
-업체 화면에는 **확인 미완료 / 조건 충족 / 기한 만료**가 표시됩니다. 소득 미달 등 구체적인 실패 사유는 신청자 화면에만 안내하고 업체에는 전달하지 않습니다.
+The agency sees **Pending / Conditions met / Expired**. The applicant sees specific local failure messages, such as insufficient income. The agency receives no detailed failure reason and cannot distinguish an unprocessed request from a failed attempt through this status alone.
 
-역할별 버튼과 확인 기준은 [시연 가이드](docs/matchproof-judge-guide.md)에 있습니다.
+Follow the [English demo guide](docs/matchproof-judge-guide.en.md) or [한국어 시연 가이드](docs/matchproof-judge-guide.md) for the exact click sequence.
 
-## Midnight 활용
+## How MatchProof uses Midnight
 
-- **비공개 조건 검증:** Compact 회로가 등록된 자격, 신청자 키 소유, 소득·혼인·기간 조건을 검증합니다.
-- **요청 결합과 재사용 방지:** 증명을 특정 배포·신청자·심사 요청에 연결하고, 승인된 요청은 다시 사용하지 못하게 합니다.
-- **독립적인 결과 확인:** 체인에서 확정된 승인 기록을 별도 화면이 공개 인덱서에서 읽습니다. 화면의 임의 상태를 성공 결과로 사용하지 않습니다.
+- **Private eligibility checks:** Compact circuits verify credential membership, applicant key ownership and the income, marital-status and time conditions.
+- **Request binding and replay prevention:** Each proof binds to a deployment, applicant and review request. A request can receive only one approval.
+- **Independent verification:** A separate view reads confirmed approval records from the public indexer. A local UI flag does not establish success.
 
-## 실행 방법
+## Run locally
 
-Node.js 22.12 이상, npm, unzip, Docker Compose가 필요합니다. macOS/Linux 또는 WSL에서 실행합니다. Compact compiler는 0.31.1을 사용합니다.
+Requires Node.js 22.12 or later, npm, unzip and Docker Compose on macOS, Linux or WSL. The pinned Compact compiler version is 0.31.1.
 
 ```sh
 git clone https://github.com/team-hyunjae/MatchProof.git
@@ -49,35 +51,39 @@ npm run doctor:network
 npm run demo
 ```
 
-`MatchProof DEMO READY`가 출력되면 [앱 열기](http://127.0.0.1:4180/matchproof)를 선택합니다. 개발 서비스 준비가 끝나기 전에 `doctor:network`가 실패하면 서비스 상태를 확인한 뒤 다시 실행합니다.
+Wait for `MatchProof DEMO READY`, then [open the app](http://127.0.0.1:4180/matchproof). If `doctor:network` runs before the development services are ready, check their status and retry. A `127.0.0.1` link refers to the computer opening it. It is not a publicly hosted demo URL.
 
-### 개발용 지갑 연결
+### Development wallet
 
-`npm run demo`가 공식 테스트 지갑 어댑터를 실행하므로 **이 시연 경로에는 지갑 확장을 별도로 설치할 필요가 없습니다.**
+`npm run demo` starts the official test wallet adapter. **No wallet extension is required for this demo path.**
 
-1. 화면에 **개발용 테스트 지갑 연결 준비됨**이 표시되는지 확인합니다.
-2. 각 역할에서 **이 기기의 보관 암호**를 입력합니다. 처음 설정할 때는 16자 이상, 대문자·소문자·숫자·기호 중 3종류 이상을 사용합니다. 기존 보관함은 같은 암호로 연결합니다.
-3. **개발용 지갑 연결**을 누릅니다. 처음 배포를 준비할 때 프로그램 배포 주소는 비워 둡니다.
+1. Look for **개발용 테스트 지갑 연결 준비됨** (Development test wallet ready).
+2. Enter **이 기기의 보관 암호** (Vault password on this device) for each role. A new password needs at least 16 characters and three of these categories: uppercase letters, lowercase letters, numbers and symbols. Reuse the same password for an existing vault.
+3. Click **개발용 지갑 연결** (Connect development wallet). Leave the deployment address empty when preparing the first deployment.
 
-보관 암호는 이 기기의 자료를 암호화하는 용도이며 지갑 복구 구문이 아닙니다. 테스트 지갑은 개발 거래를 자동 서명하며 실제 확장 지갑의 승인창을 표시하지 않습니다.
+The vault password encrypts local app data. It is not a wallet recovery phrase. The development wallet automatically signs test transactions and does not show a real wallet extension's approval prompt.
 
-실행 터미널을 켜 두어야 합니다. 준비 완료 후 30분에 데모가 종료되면 `npm run demo`를 다시 실행하고 페이지를 새로고침합니다. 같은 테스트 지갑을 쓰는 `matchproof:smoke`는 demo와 동시에 실행하지 않습니다. 실행 상세와 문제 해결은 [실행 안내](docs/matchproof-runbook.md)를 참고합니다.
+Keep the terminal running. The demo stops 30 minutes after it becomes ready. Restart `npm run demo` and refresh the page to reconnect. Do not run `matchproof:smoke` at the same time as the demo because they use the same development wallet. See the [English demo guide](docs/matchproof-judge-guide.en.md) or the detailed [Korean runbook](docs/matchproof-runbook.md).
 
-## 검증 결과
+## Verification
 
-- 공개 GitHub 저장소를 인증 없이 새로 clone한 환경에서 설치·계약 컴파일·**38개 테스트·빌드** 통과.
-- 개발 체인에서 새 계약 배포 → 자격 발급 → 심사 요청 → 증명 확정 → 별도 공개 조회 성공.
-- 재사용·소득 미달은 제출 전 회로 실행에서 거절되고, 다른 신청자의 자격·요청 파일은 가져오기 단계에서 거절됨을 확인.
+- A fresh, unauthenticated clone of the public repository passed installation, contract compilation, **38 tests** and the application build at the commit recorded in the evidence report.
+- The development-chain integration run deployed a new contract, issued a credential, opened a request, confirmed a proof and verified the result through an independent public read.
+- Replay and insufficient-income cases failed during circuit execution before submission. Import checks rejected another applicant's credential and request files.
 
-[공개 clone 검증 기록](submission/evidence/2026-09-26-public-clone.json) · [개발 체인 거래 기록](submission/evidence/2026-09-26-matchproof-smoke.json)
+[Public clone evidence](submission/evidence/2026-09-26-public-clone.json) · [Development-chain transaction evidence](submission/evidence/2026-09-26-matchproof-smoke.json)
+
+These are historical verification records, not a guarantee that the recorded deployment is still available or its requests remain valid.
 
 ```sh
 npm test
 npm run build
 ```
 
-## 시연 범위
+## Privacy and prototype boundaries
 
-모의 검증기관과 가상 자료를 사용합니다. 실제 공공기관 서류, 회원 로그인, 매칭·채팅·결제는 포함하지 않습니다. 자료의 진위는 발급기관의 확인을 신뢰하며, 확인 이후의 현재 혼인 상태를 보증하지 않습니다.
+The prototype uses a mock issuer and synthetic evidence. It does not integrate government documents, real member authentication, matchmaking, chat or payments. The issuer establishes the evidence's truth. The proof checks that evidence against the policy and does not establish marital status after the evidence check date.
 
-기관과 신청자는 자료 내용을 알고, 증명 서버는 비공개 입력을 처리합니다. 업체에는 원본이나 정확한 소득액을 전달하지 않지만 공개 정책·시각·성공 기록은 관찰할 수 있으므로 완전 익명을 주장하지 않습니다. Loopback 주소도 SSH 터널이면 다른 기기의 서버로 연결될 수 있습니다.
+The issuer and applicant know the evidence values, and the proof server processes private inputs. The agency does not receive the raw documents or exact income. Public commitments, policy, request identifiers, time bounds and approval records remain observable. If a request becomes linked to a person, it can reveal that they met the conditions. MatchProof does not claim complete anonymity or automatic legal compliance. Loopback endpoints may forward to a proof server on another machine through SSH.
+
+**Ten-minute expiry limits the request's use. It does not delete chain history.** After expiry, the app displays Expired even when a historical approval exists. The current contract has no deletion or revocation function. Retention and erasure of off-chain files and any personal-data implications of public records require separate design for a production service.
