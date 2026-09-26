@@ -1,10 +1,10 @@
 # GitHub 공개 저장소 준비
 
-팀: 현재 / 팀원 2명. 제출 앱: MatchProof. 사용자가 지정한 GitHub 계정: [pegeaether](https://github.com/pegeaether). 팀원은 [mjlee5929](https://github.com/mjlee5929)다. 조직의 표시 이름은 현재, URL 식별자는 사용자 선택 대기다.
+팀: 현재 / 팀원 2명. 제출 앱: MatchProof. 사용자가 지정한 GitHub 계정: [pegeaether](https://github.com/pegeaether). 팀원은 [mjlee5929](https://github.com/mjlee5929)다. 요청한 구성은 조직 표시 이름 **현재**, URL 식별자 **hyunjae**, 공개 저장소 이름 **MatchProof**다.
 
 ## 현재 상태
 
-2026-09-26 `gh api user`로 이 기기의 GitHub CLI가 **pegeaether**로 인증된 것을 확인했다. `mjlee5929` 공개 계정도 확인했다. 계정 전환은 완료됐으며, 현재 계정에서 조회되는 조직은 없다. 조직 URL 식별자는 앞서 제안한 `team-hyeonjae` 또는 `hyeonjae-team` 중 선택 대기다. 원격 저장소·조직 생성과 push는 아직 수행하지 않았다.
+2026-09-26 `gh api user`로 이 기기의 GitHub CLI가 **pegeaether**로 인증된 것을 확인했다. `mjlee5929` 공개 계정도 확인했다. 계정 전환은 완료됐으며, 현재 계정에서 조회되는 조직은 없다. 요청한 `hyunjae`는 `gh api users/hyunjae`에서 기존 개인 계정 [Hyunjae](https://github.com/Hyunjae)로 조회됐다. 따라서 해당 주소로 새 조직을 만들 수 없어 대체 식별자를 확인 중이다. `team-hyunjae`와 `hyunjae-team`은 공개 계정 조회에서 404를 반환했다. 이는 최종 사용 가능 여부를 보장하지 않으므로 선택 후 GitHub 생성 화면에서 확인한다. 원격 저장소·조직 생성과 push는 아직 수행하지 않았다.
 
 로컬 저장소는 `~/devel/ai/MatchProof`, 기본 브랜치는 `main`이다. 두 계정은 README와 제출 설명의 팀원 목록에 반영했다. 팀원 초대와 권한 부여는 아직 수행하지 않았다. Git 작성자는 이 저장소에만 `pegeaether <248258133+pegeaether@users.noreply.github.com>`으로 설정했다. 전역 설정은 유지했고 다른 사람 명의의 커밋은 만들지 않는다.
 
@@ -29,4 +29,4 @@ gh api user --jq .login
 - 공개 저장소의 라이선스 표기를 확인하고 외부 코드의 기존 라이선스·출처를 유지.
 - Git 작성자는 로컬 저장소 범위에서 설정하고 전역 설정은 바꾸지 않음.
 
-계정·조직 식별자 확인 후 `MatchProof` 공개 저장소를 만들고 remote를 연결한다. 아직 존재하지 않는 저장소 URL을 제출 자료에 완료 링크로 기재하지 않는다.
+계정 확인은 완료됐다. 사용 가능한 조직 식별자 확정 후 표시 이름을 `현재`로 설정하고 `MatchProof` 공개 저장소를 만들어 remote를 연결한다. 아직 존재하지 않는 저장소 URL을 제출 자료에 완료 링크로 기재하지 않는다.

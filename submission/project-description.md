@@ -5,7 +5,7 @@
 팀원 GitHub: [pegeaether](https://github.com/pegeaether) · [mjlee5929](https://github.com/mjlee5929)  
 Luma 참가 등록: 완료 (사용자 확인)  
 프로젝트명: MatchProof  
-공개 GitHub: pegeaether 계정 기준, 현재 팀 조직/저장소 주소 확정 대기  
+공개 GitHub: 현재 팀 조직의 MatchProof 저장소 생성 예정 (조직 URL 확정 대기)  
 시연 영상: 미정 (선택)  
 네트워크: Midnight Local Devnet (`undeployed`)
 

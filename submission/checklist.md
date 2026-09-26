@@ -11,7 +11,7 @@
 - [x] GitHub CLI가 pegeaether 계정으로 인증된 것을 확인.
 - [x] 프로젝트명: MatchProof.
 - [x] 한 줄 설명 초안: project-description.md.
-- [ ] 공개 GitHub 저장소 URL 확정. README 포함.
+- [ ] 공개 GitHub 저장소 URL 확정. 요청 구성은 표시 이름 현재 / 조직 hyunjae / 저장소 MatchProof. hyunjae는 기존 개인 계정이 사용 중이므로 대체 조직 식별자 확인 필요. README 포함.
 - [x] 텍스트 실행 절차·데모 가이드 작성.
 - [x] Midnight 활용 방식·신뢰 경계 설명 작성.
 - [ ] 선택 사항: 데모 영상 URL. 제출 접근성을 위해 권장하되 공식 필수라고 설명하지 않음.
