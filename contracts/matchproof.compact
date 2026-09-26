@@ -1,0 +1,126 @@
+pragma language_version 0.23;
+
+import CompactStandardLibrary;
+
+// Synthetic-data prototype for a marriage agency's admission review.
+// The issuer attests facts; ZK does not establish the truth of real documents.
+export struct Credential {
+  holder: Bytes<32>;
+  salt: Bytes<32>;
+  annualIncomeKrw: Uint<64>;
+  incomeYear: Uint<16>;
+  notCurrentlyMarried: Boolean;
+  checkedAt: Uint<64>;
+  validUntil: Uint<64>;
+}
+
+export struct ReviewRequest {
+  requestedAt: Uint<64>;
+  expiresAt: Uint<64>;
+}
+
+export ledger programId: Bytes<32>;
+export ledger issuerKeyHash: Bytes<32>;
+export ledger agencyKeyHash: Bytes<32>;
+export ledger minimumIncomeKrw: Uint<64>;
+export ledger requiredIncomeYear: Uint<16>;
+export ledger maxEvidenceAgeSeconds: Uint<64>;
+export ledger credentials: MerkleTree<10, Bytes<32>>;
+export ledger registered: Set<Bytes<32>>;
+export ledger requests: Map<Bytes<32>, ReviewRequest>;
+export ledger approvals: Map<Bytes<32>, Uint<64>>;
+
+witness issuerSecret(): Bytes<32>;
+witness agencySecret(): Bytes<32>;
+witness holderSecret(): Bytes<32>;
+witness credential(): Credential;
+witness membershipPath(): MerkleTreePath<10, Bytes<32>>;
+witness requestNonce(): Bytes<32>;
+
+constructor(program: Bytes<32>, issuer: Bytes<32>, agency: Bytes<32>, incomeFloor: Uint<64>, incomeYear: Uint<16>, maxEvidenceAge: Uint<64>) {
+  assert(maxEvidenceAge > 0, "MAX_AGE_INVALID");
+  programId = disclose(program);
+  issuerKeyHash = disclose(issuer);
+  agencyKeyHash = disclose(agency);
+  minimumIncomeKrw = disclose(incomeFloor);
+  requiredIncomeYear = disclose(incomeYear);
+  maxEvidenceAgeSeconds = disclose(maxEvidenceAge);
+}
+
+export circuit issuerCommitment(secret: Bytes<32>): Bytes<32> {
+  return persistentHash<Vector<2, Bytes<32>>>([pad(32, "matchproof:issuer:v1"), secret]);
+}
+
+export circuit agencyCommitment(secret: Bytes<32>): Bytes<32> {
+  return persistentHash<Vector<2, Bytes<32>>>([pad(32, "matchproof:agency:v1"), secret]);
+}
+
+export circuit holderCommitment(secret: Bytes<32>): Bytes<32> {
+  return persistentHash<Vector<2, Bytes<32>>>([pad(32, "matchproof:holder:v1"), secret]);
+}
+
+export circuit credentialCommitment(program: Bytes<32>, evidence: Credential): Bytes<32> {
+  return persistentHash<Vector<3, Bytes<32>>>([pad(32, "matchproof:credential:v1"), program, persistentHash<Credential>(evidence)]);
+}
+
+export circuit requestCommitment(program: Bytes<32>, holder: Bytes<32>, nonce: Bytes<32>): Bytes<32> {
+  // Each nonce is random, private and unique to an authenticated agency session.
+  return persistentHash<Vector<4, Bytes<32>>>([pad(32, "matchproof:request:v1"), program, holder, nonce]);
+}
+
+export circuit issue(): Bytes<32> {
+  assert(issuerCommitment(issuerSecret()) == issuerKeyHash, "ISSUER_UNAUTHORIZED");
+  const evidence = credential();
+  assert(evidence.validUntil > evidence.checkedAt, "CREDENTIAL_DATES_INVALID");
+  const commitment = disclose(credentialCommitment(programId, evidence));
+  assert(!registered.member(commitment), "CREDENTIAL_EXISTS");
+  assert(!credentials.isFull(), "ISSUER_CAPACITY_REACHED");
+  credentials.insert(commitment);
+  registered.insert(commitment);
+  return commitment;
+}
+
+export circuit openRequest(request: Bytes<32>, requestedAt: Uint<64>, expiresAt: Uint<64>): [] {
+  assert(agencyCommitment(agencySecret()) == agencyKeyHash, "AGENCY_UNAUTHORIZED");
+  const key = disclose(request);
+  const start = disclose(requestedAt);
+  const deadline = disclose(expiresAt);
+  assert(deadline > start, "REQUEST_DEADLINE_INVALID");
+  assert(blockTimeGte(start), "REQUEST_FROM_FUTURE");
+  assert(blockTimeLt((start + 60) as Uint<64>), "REQUEST_START_TOO_OLD");
+  assert(blockTimeLt(deadline), "REQUEST_EXPIRED");
+  assert(deadline <= (start + 600) as Uint<64>, "REQUEST_WINDOW_TOO_LONG");
+  assert(!requests.member(key), "REQUEST_EXISTS");
+  requests.insert(key, ReviewRequest { requestedAt: start, expiresAt: deadline });
+}
+
+export circuit proveEligibility(request: Bytes<32>): [] {
+  const key = disclose(request);
+  assert(requests.member(key), "REQUEST_UNKNOWN");
+  assert(!approvals.member(key), "REQUEST_ALREADY_USED");
+  const review = requests.lookup(key);
+  const deadline = review.expiresAt;
+  assert(blockTimeGte(review.requestedAt), "REQUEST_FROM_FUTURE");
+  assert(blockTimeLt(deadline), "REQUEST_EXPIRED");
+
+  const evidence = credential();
+  const holder = holderCommitment(holderSecret());
+  assert(evidence.holder == holder, "HOLDER_MISMATCH");
+  assert(requestCommitment(programId, holder, requestNonce()) == key, "REQUEST_BINDING_MISMATCH");
+  const path = membershipPath();
+  assert(path.leaf == credentialCommitment(programId, evidence), "CREDENTIAL_MISMATCH");
+  const root = merkleTreePathRoot<10, Bytes<32>>(path);
+  assert(credentials.checkRoot(disclose(root)), "CREDENTIAL_NOT_ISSUED");
+
+  // Exact amounts and status never become public arguments or ledger fields.
+  assert(evidence.incomeYear == requiredIncomeYear, "INCOME_YEAR_MISMATCH");
+  assert(evidence.annualIncomeKrw >= minimumIncomeKrw, "INCOME_BELOW_POLICY");
+  assert(evidence.notCurrentlyMarried, "MARITAL_POLICY_NOT_MET");
+  // Block-time bounds are public. Compare private evidence dates with the
+  // public request window inside the circuit instead of disclosing those dates.
+  assert(evidence.checkedAt <= review.requestedAt, "EVIDENCE_FROM_FUTURE");
+  // Successful review stays valid only through its short request window.
+  assert(evidence.validUntil >= deadline, "CREDENTIAL_EXPIRES_BEFORE_REQUEST");
+  assert((evidence.checkedAt + maxEvidenceAgeSeconds) as Uint<64> >= deadline, "EVIDENCE_EXPIRES_BEFORE_REQUEST");
+  approvals.insert(key, deadline);
+}

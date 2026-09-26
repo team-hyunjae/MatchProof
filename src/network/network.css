@@ -1,0 +1,147 @@
+.network-page {
+  max-width: 1040px;
+  margin: auto;
+  padding: 28px 32px;
+}
+.network-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 52px;
+}
+.network-header a:last-child {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+.network-page main {
+  padding: 0;
+}
+.network-page h1 {
+  font-size: clamp(26px, 4vw, 40px);
+  letter-spacing: -1.5px;
+}
+.network-intro {
+  color: #66706a;
+  margin: 16px 0 24px;
+  line-height: 1.7;
+}
+.network-mode {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 24px 0;
+  color: #38634d;
+  font-size: 13px;
+}
+.network-page .panel {
+  margin: 20px 0;
+  padding: 28px;
+}
+.network-roles,
+.network-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 16px 0;
+}
+.network-roles button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.network-roles .selected {
+  background: #e1ebdc;
+  border-color: #647b51;
+}
+.network-fields {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 16px;
+}
+.network-page label {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  font-size: 13px;
+  font-weight: 600;
+  margin: 18px 0;
+}
+.network-page input,
+.network-page select,
+.network-page textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid #d9ddd3;
+  border-radius: 8px;
+  background: #fff;
+  color: #24342b;
+  font: inherit;
+}
+.network-page textarea {
+  min-height: 78px;
+  resize: vertical;
+  font-family: monospace;
+  overflow-wrap: anywhere;
+}
+.network-page .section-description {
+  line-height: 1.7;
+}
+.network-page button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.network-hash code,
+.network-receipts code {
+  display: block;
+  overflow-wrap: anywhere;
+  font-size: 12px;
+  margin-top: 9px;
+}
+.network-receipts {
+  list-style: none;
+  padding: 0;
+}
+.network-receipts li {
+  border-top: 1px solid #e1e4dc;
+  padding: 18px 0;
+}
+.network-receipts span {
+  margin-left: 18px;
+  font-size: 12px;
+  color: #65705f;
+}
+.network-spinner {
+  height: 16px;
+  width: 16px;
+  border: 2px solid #abc49d;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  flex-shrink: 0;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (max-width: 600px) {
+  .network-page {
+    padding: 20px 16px;
+  }
+  .network-fields {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .network-page .panel {
+    padding: 20px;
+  }
+  .network-header {
+    margin-bottom: 32px;
+  }
+}

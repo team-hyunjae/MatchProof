@@ -1,0 +1,20 @@
+{
+  "network": "undeployed",
+  "started": "2026-09-26T02:37:42.808Z",
+  "mode": "real-local-chain",
+  "proofs": true,
+  "deployTx": "5fedb141d338c4fdad1b0ffc74d3be8b8f6ab79628bf38796fadfc51199fd811",
+  "address": "c31768e446c929f327a04f4fae60564716624baec58b91cc5d9f7bb26483bf48",
+  "issueTx": "f91b19cd5b61acbd361961dd6d03b715d1f89e1e3d686f3c8399141886df25d2",
+  "requestTx": "b06d8d6835b200a31943bcc2307d88eec76a18271edefb2b7bc96f3197257561",
+  "proveTx": "1fd7a7f7db5f8148c7eaa7bced4fc7b8ee9a8b24cfa5677fdd966c9fde1adfed",
+  "proveMilliseconds": 22713,
+  "requestKey": "be35117b89d559d2037890c960ff78f423b8465f15df67a510d0ba2d6a6066e8",
+  "replay": "rejected-before-submission",
+  "expiresAt": 1790390937,
+  "agencyRead": "verified-without-private-state",
+  "otherApplicant": "credential-and-request-import-rejected",
+  "lowIncome": "rejected-before-submission",
+  "finished": "2026-09-26T02:40:27.164Z",
+  "passed": true
+}
