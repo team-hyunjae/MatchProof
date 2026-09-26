@@ -6,7 +6,7 @@
 - 로컬 작업 폴더: `~/devel/ai/MatchProof`
 - 팀원: [pegeaether](https://github.com/pegeaether), [mjlee5929](https://github.com/mjlee5929)
 
-2026-09-26 조직 생성, `pegeaether`의 조직 관리자 권한, 표시 이름 `현재`, 공개 저장소 생성을 확인했다. 코드 업로드와 공개 clone 재현 상태는 [제출 체크리스트](checklist.md)에 기록한다.
+2026-09-26 조직 생성, `pegeaether`의 조직 관리자 권한, 표시 이름 `현재`, 공개 저장소 생성을 확인했다. main 브랜치 코드·README 업로드와 인증 없는 공개 clone을 완료했다. 새 clone의 설치·계약 컴파일·38개 테스트·빌드·doctor가 통과했으며 [검증 기록](evidence/2026-09-26-public-clone.json)에 남겼다.
 
 ## 저장소 받기
 

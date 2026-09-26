@@ -64,6 +64,21 @@
 
 신규 거래는 CLI 통합 검사다. 이번 실행으로 새 브라우저의 전체 클릭 흐름이나 확장 지갑 승인창까지 검증했다고 주장하지 않는다.
 
+## 공개 GitHub 저장소 clone 재현
+
+2026-09-26 [team-hyunjae/MatchProof](https://github.com/team-hyunjae/MatchProof)의 공개 상태와 기본 브랜치 `main`을 확인했다. 인증 설정을 사용하지 않고 새 디렉터리로 clone했다. 검증 대상은 [df9cb78](https://github.com/team-hyunjae/MatchProof/commit/df9cb78e0942b3883faf4872f5a7c9c18d5b879c)이다.
+
+- 기존 의존성·컴파일러·증명 키·빌드·실행 상태 없이 시작.
+- `npm ci`: 529개 패키지 설치 성공.
+- `npm run setup:compiler`: 공식 다운로드와 SHA-256 확인 후 Compact 0.31.1 설치.
+- `npm run contract:compile`, `npm run matchproof:compile`: 전체 5개 회로 컴파일·증명 자산 생성 성공.
+- `npm test`: 38/38 통과.
+- `npm run build`, `npm run doctor`: 성공. 기존 SDK export·번들 크기 경고와 의존성 deprecation 안내는 남는다.
+- README·제출 문서의 로컬 파일 링크 16개 확인.
+- 검사 후 추적 파일 변경 없음.
+
+[공개 clone 검사 기록](evidence/2026-09-26-public-clone.json)을 보존했다. 같은 기기의 새 clone을 사용한 검사이며 다른 물리 기기의 Compose 기동이나 새 전체 브라우저 거래 시연까지 수행한 것은 아니다.
+
 ## 남은 검증
 
-새 배포의 전체 수동 시연, 원격 저장소 clone 재현, 지갑 확장 승인·독립 물리 기기 검증은 별도로 기록한다. 기존 9/21 성공 증거를 9/26 신규 실행처럼 표현하지 않는다.
+새 배포의 전체 수동 시연, 지갑 확장 승인·독립 물리 기기 검증은 별도로 기록한다. 기존 9/21 성공 증거를 9/26 신규 실행처럼 표현하지 않는다.
