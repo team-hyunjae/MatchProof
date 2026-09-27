@@ -8,7 +8,9 @@ Repository / 저장소: [team-hyunjae/MatchProof](https://github.com/team-hyunja
 
 Network / 네트워크: Midnight Local Devnet (`undeployed`)
 
-Project Deck / 발표 자료: Google Slides 링크 준비 중. 제출 폼은 Google Slides 링크를 요구함.
+Project Deck / 발표 자료: [Google Slides 11장](https://docs.google.com/presentation/d/1VJEq6m6tI9KfbuZDTHvcM2DCBi2k7dvJ2QQAED4eHsY/edit?usp=drivesdk). 변환 완료, 심사위원 열람 권한 설정 대기.
+
+[제출 폼용 한국어 답변](form-answers.ko.md): Project Overview · Midnight Implementation · Project Deck.
 
 Demo video / 시연 영상: 2분 57초 편집 완료, 공개 링크 준비 중 / 2:57 edit complete; shareable link pending. [파일 안내](video-delivery.md).
 

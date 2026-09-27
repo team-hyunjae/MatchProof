@@ -42,6 +42,6 @@
 
 - 기존 4분 52초 상세 영상: `artifacts/recordings/2026-09-27/matchproof-demo-ko-en.mp4`. 필요하면 추가 설명용으로 사용한다.
 - 이번 제출 폼에는 Project Overview, Midnight Implementation, Google Slides 형식의 Project Deck 링크, Demo Video Link 항목이 있다.
-- **Google Slides 링크는 아직 준비되지 않았다.** 기존 `MatchProof-pitch.ko-en.pptx`를 변환하고 보기 권한을 확인해야 한다.
+- [Google Slides 발표 자료](https://docs.google.com/presentation/d/1VJEq6m6tI9KfbuZDTHvcM2DCBi2k7dvJ2QQAED4eHsY/edit?usp=drivesdk) 변환과 11장 문구·배치 확인을 완료했다. 심사위원 열람 권한 설정은 브라우저 로그인 후 진행해야 한다.
 - 축약본을 YouTube·Loom 등으로 업로드한 뒤 로그인 없이 재생되는 링크를 확인하고 제출 폼에 반영한다.
 - 아울러 팀 연락처 등 나머지 필수 필드를 확인하고 최종 접수 확인을 보관한다.
