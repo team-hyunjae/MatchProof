@@ -6,6 +6,8 @@
 
 **팀 현재** · [pegeaether](https://github.com/pegeaether) · [mjlee5929](https://github.com/mjlee5929)
 
+[데모 영상 (2분 57초, 한국어 음성·영어 자막)](https://youtu.be/jbL1IBC1IhQ) · [발표 자료 (한국어·영어)](https://docs.google.com/presentation/d/1jgNsZvViKf9DByWcdiN79-8xpIDZKnFhCrISwnZCvW4/edit?usp=sharing)
+
 > Midnight Local Devnet (`undeployed`)에서 가상 자료로 실행하는 시연 앱입니다.
 
 ## 해결하려는 문제

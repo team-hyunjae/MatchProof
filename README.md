@@ -6,6 +6,8 @@ A Midnight DApp for marriage matchmaking agencies to verify applicant-approved e
 
 **Team 현재** · [pegeaether](https://github.com/pegeaether) · [mjlee5929](https://github.com/mjlee5929)
 
+[Demo video (2:57, Korean narration / English subtitles)](https://youtu.be/jbL1IBC1IhQ) · [Presentation (KO / EN)](https://docs.google.com/presentation/d/1jgNsZvViKf9DByWcdiN79-8xpIDZKnFhCrISwnZCvW4/edit?usp=sharing)
+
 > A working prototype using synthetic data on Midnight Local Devnet (`undeployed`). The application interface is in Korean. The [English demo guide](docs/matchproof-judge-guide.en.md) maps its buttons to English.
 
 ## The problem

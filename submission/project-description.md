@@ -12,7 +12,7 @@ Project Deck / 발표 자료: [Google Slides 11장](https://docs.google.com/pres
 
 [제출 폼용 한국어 답변](form-answers.ko.md): Project Overview · Midnight Implementation · Project Deck.
 
-Demo video / 시연 영상: 2분 57초 편집 완료, 공개 링크 준비 중 / 2:57 edit complete; shareable link pending. [파일 안내](video-delivery.md).
+Demo video / 시연 영상: [YouTube 데모 · 2:57](https://youtu.be/jbL1IBC1IhQ) — 일부 공개 / Unlisted. 한국어 음성·영어 자막 / Korean narration with English subtitles. [파일 안내](video-delivery.md).
 
 아래 한국어·영어 설명은 같은 구현 범위를 설명한다. 폼의 실제 글자 수 제한과 필수 항목에 맞춰 해당 언어의 내용을 사용한다. 이 문서는 제출 완료 기록이 아니다.
 

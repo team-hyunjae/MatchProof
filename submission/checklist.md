@@ -16,7 +16,7 @@
 - [x] main 브랜치 코드·README 업로드, 공개 API 및 인증 없는 clone 성공 확인.
 - [x] 텍스트 실행 절차·데모 가이드 작성.
 - [x] Midnight 활용 방식·신뢰 경계 설명 작성.
-- [ ] 데모 영상 URL. 사용자 공유 제출 폼에서 YouTube·Loom 등과 3분 이내 권장 안내 확인. 최종 필수 여부는 폼 표시를 따름.
+- [x] [데모 영상 URL](https://youtu.be/jbL1IBC1IhQ): 일부 공개, 2분 57초. 사용자 공유 제출 폼의 3분 이내 권장에 맞춤.
 - [ ] 선택 사항: 보유한 Midnight Academy 수료증 가산점 자료. 수료 여부를 임의로 기재하지 않음.
 - [ ] 제출 폼 최종 필드, 팀 연락처, 접수 확인.
 
@@ -55,7 +55,8 @@
 - [x] 발표 자료를 [Google Slides 11장](https://docs.google.com/presentation/d/1jgNsZvViKf9DByWcdiN79-8xpIDZKnFhCrISwnZCvW4/edit?usp=sharing)으로 변환하고 문구·배치 확인.
 - [x] [제출 폼용 한국어 답변](form-answers.ko.md) 작성.
 - [x] 사용자 제공 최종 Google Slides 링크로 교체. 11장 내용과 일반 액세스의 “Anyone with the link / No sign-in required” 설정 확인.
-- [ ] 최종 영상 업로드·로그인 없는 재생 확인 및 제출 설명에 URL 반영.
+- [x] 최종 영상 업로드 및 제출 설명·README URL 반영. 로그인된 브라우저에서 재생 진행·2:57 길이·일부 공개 표시 확인.
+- [ ] 시크릿 창에서 영상의 로그인 없는 재생 최종 확인.
 - [ ] 최종 제출 폼에서 언어·분량·연락처 등 필수 항목 확인.
 
 ## 제출 순서

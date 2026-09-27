@@ -37,7 +37,14 @@ https://docs.google.com/presentation/d/1jgNsZvViKf9DByWcdiN79-8xpIDZKnFhCrISwnZC
 
 발표 자료는 한국어와 영어 핵심 문장을 함께 담은 11장으로 구성했습니다. 검증기관·신청자·결혼정보업체·증명 서버·Midnight·인덱서의 역할과 데이터 이동을 전체 흐름 및 단계별 그림으로 설명합니다. 자격 발급부터 심사 요청, 동의와 증명, 공개 결과 조회까지의 사용 흐름과 비공개·공개 데이터의 구분, 요청 만료와 기록 보존, 프로토타입의 검증 결과와 현재 범위를 포함합니다.
 
+## 데모 영상 링크 (Demo Video Link)
+
+https://youtu.be/jbL1IBC1IhQ
+
+2분 57초 데모입니다. 한국어 내레이션과 영어 자막으로 자격 발급, 심사 요청, 신청자 동의와 증명, 업체의 공개 결과 조회, 소득 미달 거절을 시연합니다.
+
 ## 링크 상태
 
 - Google Slides 변환 및 11장 문구·배치 확인 완료.
 - 사용자 제공 최종 링크로 교체. 11장 내용을 확인했고 Google Slides에서 “Anyone with the link / No sign-in required” 공유 설정을 확인했다.
+- YouTube 일부 공개·2:57 및 로그인된 브라우저에서의 재생 확인. 제출 전 시크릿 창에서 로그인 없는 재생을 최종 확인한다.

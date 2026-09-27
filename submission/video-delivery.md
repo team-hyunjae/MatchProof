@@ -1,6 +1,6 @@
 # MatchProof 제출용 영상
 
-2026-09-27 사용자가 공유한 제출 폼의 **3분 이내 권장**에 맞춰 **2분 57.04초, 1080p** 버전을 만들었다. 이번 업로드에는 아래 축약본을 사용한다. 공개 업로드와 최종 제출은 아직 수행하지 않았다.
+2026-09-27 사용자가 공유한 제출 폼의 **3분 이내 권장**에 맞춰 **2분 57.04초, 1080p** 버전을 만들었다. 사용자가 이 축약본을 [YouTube에 일부 공개로 업로드](https://youtu.be/jbL1IBC1IhQ)했다. 브라우저에서 2분 57초 길이와 재생 진행을 확인했다. 확인 당시 브라우저는 로그인 상태였으며, 로그아웃 상태의 재생과 최종 접수는 아직 확인하지 않았다.
 
 로컬 폴더: `artifacts/recordings/2026-09-27/3min/`
 
@@ -43,5 +43,5 @@
 - 기존 4분 52초 상세 영상: `artifacts/recordings/2026-09-27/matchproof-demo-ko-en.mp4`. 필요하면 추가 설명용으로 사용한다.
 - 이번 제출 폼에는 Project Overview, Midnight Implementation, Google Slides 형식의 Project Deck 링크, Demo Video Link 항목이 있다.
 - [Google Slides 발표 자료](https://docs.google.com/presentation/d/1jgNsZvViKf9DByWcdiN79-8xpIDZKnFhCrISwnZCvW4/edit?usp=sharing) 변환과 11장 문구·배치 확인을 완료했다. 사용자 제공 최종 링크로 교체했고, 로그인 없이 링크로 접근 가능한 공유 설정을 확인했다.
-- 축약본을 YouTube·Loom 등으로 업로드한 뒤 로그인 없이 재생되는 링크를 확인하고 제출 폼에 반영한다.
+- [YouTube 영상](https://youtu.be/jbL1IBC1IhQ) 업로드 및 제출 설명·README 링크 반영 완료. 제출 전 시크릿 창에서 로그인 없이 재생되는지 최종 확인한다.
 - 아울러 팀 연락처 등 나머지 필수 필드를 확인하고 최종 접수 확인을 보관한다.
