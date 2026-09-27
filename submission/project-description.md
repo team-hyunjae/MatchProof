@@ -8,7 +8,7 @@ Repository / 저장소: [team-hyunjae/MatchProof](https://github.com/team-hyunja
 
 Network / 네트워크: Midnight Local Devnet (`undeployed`)
 
-Project Deck / 발표 자료: [Google Slides 11장](https://docs.google.com/presentation/d/1VJEq6m6tI9KfbuZDTHvcM2DCBi2k7dvJ2QQAED4eHsY/edit?usp=drivesdk). 변환 완료, 심사위원 열람 권한 설정 대기.
+Project Deck / 발표 자료: [Google Slides 11장](https://docs.google.com/presentation/d/1jgNsZvViKf9DByWcdiN79-8xpIDZKnFhCrISwnZCvW4/edit?usp=sharing). 사용자 제공 최종 링크. 11장 및 로그인 없이 링크로 접근 가능한 공유 설정 확인.
 
 [제출 폼용 한국어 답변](form-answers.ko.md): Project Overview · Midnight Implementation · Project Deck.
 

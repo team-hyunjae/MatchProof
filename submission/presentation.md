@@ -1,6 +1,6 @@
 # MatchProof 발표 자료 / Presentation notes
 
-[Google Slides 발표 자료](https://docs.google.com/presentation/d/1VJEq6m6tI9KfbuZDTHvcM2DCBi2k7dvJ2QQAED4eHsY/edit?usp=drivesdk) · 11장 변환 완료. 심사위원 열람 권한 설정 대기.
+[Google Slides 발표 자료](https://docs.google.com/presentation/d/1jgNsZvViKf9DByWcdiN79-8xpIDZKnFhCrISwnZCvW4/edit?usp=sharing) · 사용자 제공 최종 링크. 11장 및 로그인 없이 링크로 접근 가능한 공유 설정 확인.
 [제출 폼용 한국어 답변](form-answers.ko.md)
 
 [11장 PowerPoint](MatchProof-pitch.ko-en.pptx)에는 한국어와 영어 핵심 문장을 함께 넣었다. 전체 흐름 1장과 단계별 교환 그림 4장을 추가했다. 도형·화살표·글자를 PowerPoint에서 수정할 수 있다. [영상용 그림 PNG](diagrams/README.md)와 [촬영 가이드](recording-guide.md)도 제공한다. 아래 내용은 발표자 노트다. 실제 화면 조작과 영어 자막은 [영상 대본](demo-script.md)을 따른다.

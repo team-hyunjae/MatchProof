@@ -33,11 +33,11 @@ Midnight의 공개 원장과 Compact 영지식 증명 회로를 활용해 비공
 
 ## 프로젝트 참고자료 (Project Deck)
 
-https://docs.google.com/presentation/d/1VJEq6m6tI9KfbuZDTHvcM2DCBi2k7dvJ2QQAED4eHsY/edit?usp=drivesdk
+https://docs.google.com/presentation/d/1jgNsZvViKf9DByWcdiN79-8xpIDZKnFhCrISwnZCvW4/edit?usp=sharing
 
 발표 자료는 한국어와 영어 핵심 문장을 함께 담은 11장으로 구성했습니다. 검증기관·신청자·결혼정보업체·증명 서버·Midnight·인덱서의 역할과 데이터 이동을 전체 흐름 및 단계별 그림으로 설명합니다. 자격 발급부터 심사 요청, 동의와 증명, 공개 결과 조회까지의 사용 흐름과 비공개·공개 데이터의 구분, 요청 만료와 기록 보존, 프로토타입의 검증 결과와 현재 범위를 포함합니다.
 
 ## 링크 상태
 
 - Google Slides 변환 및 11장 문구·배치 확인 완료.
-- 심사위원 열람 권한 설정 대기: 현재 특정 계정에만 공유됨. 제출 전 ‘링크가 있는 모든 사용자 · 뷰어’ 설정을 확인해야 한다.
+- 사용자 제공 최종 링크로 교체. 11장 내용을 확인했고 Google Slides에서 “Anyone with the link / No sign-in required” 공유 설정을 확인했다.
