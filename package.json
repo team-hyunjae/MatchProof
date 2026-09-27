@@ -7,7 +7,7 @@
     "node": ">=22.12.0"
   },
   "scripts": {
-    "dev": "tsx server/index.ts",
+    "dev": "vite --host 127.0.0.1 --port 4173 --strictPort",
     "preview": "vite preview --host 127.0.0.1 --port 4180 --strictPort",
     "build": "tsc --noEmit && vite build",
     "test": "tsx --test tests/*.test.ts tests/*.test.mjs",
@@ -21,9 +21,8 @@
     "assets:copy": "node scripts/copy-assets.mjs",
     "predev": "node scripts/copy-assets.mjs --optional",
     "prebuild": "npm run assets:copy",
-    "network:smoke": "tsx scripts/network-smoke.ts",
-    "network:up": "docker compose -p quietpass -f infra/compose.yml up -d",
-    "network:down": "docker compose -p quietpass -f infra/compose.yml down",
+    "network:up": "docker compose -p matchproof -f infra/compose.yml up -d",
+    "network:down": "docker compose -p matchproof -f infra/compose.yml down",
     "demo": "node scripts/matchproof-demo.mjs",
     "predemo": "npm run build",
     "doctor": "node scripts/doctor.mjs",

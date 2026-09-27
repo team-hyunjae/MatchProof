@@ -22,7 +22,7 @@ import {
   type Snapshot,
 } from "./client.ts";
 import { MatchError, type Role, type Fixture } from "./model.ts";
-import { hasErrorCode } from "../network/errors.ts";
+import { hasErrorCode } from "./errors.ts";
 import "./matchproof.css";
 
 const roles = {

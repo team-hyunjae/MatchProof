@@ -61,11 +61,6 @@
   padding: 2px 7px;
   border-radius: 4px;
 }
-.mp-legacy {
-  font-size: 12px;
-  color: var(--mp-muted);
-  text-decoration: none;
-}
 .mp-main {
   max-width: 1180px;
   margin: auto;
@@ -750,8 +745,7 @@
   .mp h1 {
     font-size: 37px;
   }
-  .mp-network code,
-  .mp-legacy {
+  .mp-network code {
     display: none;
   }
 }

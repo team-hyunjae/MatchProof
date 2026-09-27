@@ -2,7 +2,7 @@
 # Local development only; published ports bind to loopback.
 services:
   proof-server:
-    container_name: 'quietpass-proof-server'
+    container_name: 'matchproof-proof-server'
     image: 'midnightntwrk/proof-server:8.1.0'
     command: ['midnight-proof-server', '-v']
     ports:
@@ -17,7 +17,7 @@ services:
       start_period: 10s
 
   indexer:
-    container_name: 'quietpass-indexer'
+    container_name: 'matchproof-indexer'
     image: 'midnightntwrk/indexer-standalone:4.3.3'
     env_file: standalone.env.example
     ports:
@@ -44,7 +44,7 @@ services:
 
   node:
     image: 'midnightntwrk/midnight-node:1.0.0'
-    container_name: 'quietpass-node'
+    container_name: 'matchproof-node'
     ports:
       - '127.0.0.1:${MN_NODE_PORT:-9944}:9944'
     healthcheck:

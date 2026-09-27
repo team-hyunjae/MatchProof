@@ -21,11 +21,9 @@
   },
   "include": [
     "src",
-    "server",
     "contracts/*.ts",
     "tests",
     "vite.config.ts",
-    "playwright.config.ts",
     "scripts/*.ts"
   ]
 }

@@ -6,7 +6,6 @@ import { join } from "node:path";
 
 const local = resolve(".tools/compactc-0.31.1/compactc");
 const args = process.argv.slice(2);
-const matchproof = args.includes("--matchproof");
 const binary = process.env.COMPACTC ?? (existsSync(local) ? local : "compactc");
 const version = spawnSync(binary, ["--version"], { encoding: "utf8" });
 if (version.status !== 0 || version.stdout.trim() !== "0.31.1") {
@@ -23,8 +22,8 @@ const result = spawnSync(
   binary,
   [
     ...args.filter((arg) => arg !== "--matchproof"),
-    matchproof ? "contracts/matchproof.compact" : "contracts/quietpass.compact",
-    checkDirectory ?? (matchproof ? "contracts/matchproof-managed" : "contracts/managed"),
+    "contracts/matchproof.compact",
+    checkDirectory ?? "contracts/matchproof-managed",
   ],
   { stdio: "inherit" },
 );

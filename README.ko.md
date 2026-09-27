@@ -48,7 +48,6 @@ git clone https://github.com/team-hyunjae/MatchProof.git
 cd MatchProof
 npm ci
 npm run setup:compiler
-npm run contract:compile
 npm run matchproof:compile
 npm run network:up
 npm run doctor:network
@@ -71,7 +70,8 @@ npm run demo
 
 ## 검증 결과
 
-- 공개 GitHub 저장소를 인증 없이 새로 clone한 환경에서 설치·계약 컴파일·**38개 테스트·빌드** 통과.
+- 현재 계약·클라이언트·암호화 보관함·데모 도구의 자동 검사 **25개 통과**.
+- 공개 GitHub 저장소를 인증 없이 새로 clone한 환경에서 설치·계약 컴파일·빌드 통과. 검증 당시 커밋은 근거 JSON에 기록되어 있음.
 - 개발 체인에서 새 계약 배포 → 자격 발급 → 심사 요청 → 증명 확정 → 별도 공개 조회 성공.
 - 재사용·소득 미달은 제출 전 회로 실행에서 거절되고, 다른 신청자의 자격·요청 파일은 가져오기 단계에서 거절됨을 확인.
 

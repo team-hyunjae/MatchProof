@@ -2,7 +2,7 @@
 
 ## Reproduce the checks
 
-Follow the [README setup](../README.md#run-locally), including installation and both contract compilations, then run:
+Follow the [README setup](../README.md#run-locally), including installation and MatchProof contract compilation, then run:
 
 ```sh
 npm run doctor
@@ -10,7 +10,7 @@ npm test
 npm run build
 ```
 
-The automated suite covers the MatchProof contract and client, encrypted state and import validation, development-wallet serving, and shared runtime compatibility. It also retains regression tests for the legacy QuietPass modules. The reported 38 tests are the total suite, not 38 MatchProof-only tests.
+The automated suite covers the MatchProof contract and client, encrypted state and import validation, development-wallet serving, and shared runtime compatibility. The current suite contains 25 tests. The historical public-clone report records the 38-test suite at its specified commit; it is not a count for the current source tree.
 
 For real development-chain verification, start the services and run:
 

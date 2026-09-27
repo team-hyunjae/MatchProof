@@ -2,13 +2,6 @@ import { mkdir, copyFile, access } from "node:fs/promises";
 
 for (const [name, source, destination, circuits, compile] of [
   [
-    "QuietPass",
-    "contracts/managed",
-    "public/network-assets",
-    ["issue", "redeem"],
-    "contract:compile",
-  ],
-  [
     "MatchProof",
     "contracts/matchproof-managed",
     "public/matchproof-assets",

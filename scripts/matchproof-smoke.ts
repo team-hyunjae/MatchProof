@@ -4,7 +4,7 @@ import assert from "node:assert/strict";
 import { mkdir, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import pino from "pino";
-import { hasErrorCode } from "../src/network/errors.ts";
+import { hasErrorCode } from "../src/matchproof/errors.ts";
 import { firstValueFrom, filter, timeout } from "rxjs";
 import {
   FluentWalletBuilder,

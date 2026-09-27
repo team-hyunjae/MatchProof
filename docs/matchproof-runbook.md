@@ -9,7 +9,6 @@ Node.js 22.12 이상, npm, unzip, Docker Compose가 필요합니다. 저장소�
 ```sh
 npm ci
 npm run setup:compiler
-npm run contract:compile
 npm run matchproof:compile
 npm run network:up
 npm run doctor:network

@@ -6,7 +6,7 @@ import {
   type Credential,
   type Witnesses,
 } from "../../contracts/matchproof-managed/contract/index.js";
-import { hex, fromHex } from "../network/model.ts";
+import { hex, fromHex } from "./encoding.ts";
 export { hex, fromHex, pureCircuits, type Credential };
 
 export const PRIVATE_ID = "matchproof-v1";

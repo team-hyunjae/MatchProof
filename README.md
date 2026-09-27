@@ -48,7 +48,6 @@ git clone https://github.com/team-hyunjae/MatchProof.git
 cd MatchProof
 npm ci
 npm run setup:compiler
-npm run contract:compile
 npm run matchproof:compile
 npm run network:up
 npm run doctor:network
@@ -71,7 +70,8 @@ Keep the terminal running. The demo stops 30 minutes after it becomes ready. Res
 
 ## Verification
 
-- A fresh, unauthenticated clone of the public repository passed installation, contract compilation, **38 tests** and the application build at the commit recorded in the evidence report.
+- The current contract, client, storage and demo-tooling suite passes **25 tests**.
+- A fresh, unauthenticated clone passed installation, contract compilation and build at the historical commit recorded in the evidence report.
 - The development-chain integration run deployed a new contract, issued a credential, opened a request, confirmed a proof and verified the result through an independent public read.
 - Replay and insufficient-income cases failed during circuit execution before submission. Import checks rejected another applicant's credential and request files.
 

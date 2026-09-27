@@ -4,15 +4,15 @@ import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { levelPrivateStateProvider } from "@midnight-ntwrk/midnight-js-level-private-state-provider";
-import { assertLocalProver } from "../src/network/client.ts";
+import { assertLocalProver } from "../src/matchproof/network.ts";
 import {
   createActor,
   PRIVATE_ID,
   type ActorState,
-} from "../src/network/model.ts";
+} from "../src/matchproof/model.ts";
 import { StateValue as ContractStateValue } from "@midnight-ntwrk/compact-runtime";
 import { StateValue as ProtocolStateValue } from "@midnight-ntwrk/midnight-js-protocol/onchain-runtime";
-import { hasErrorCode } from "../src/network/errors.ts";
+import { hasErrorCode } from "../src/matchproof/errors.ts";
 
 test("witness rejection is recognized through SDK error wrappers without masking unrelated failures", () => {
   const inner = new Error("MEMBERSHIP_MISSING");
@@ -20,7 +20,7 @@ test("witness rejection is recognized through SDK error wrappers without masking
     cause: new Error("Error executing circuit", { cause: inner }),
   });
   assert(hasErrorCode(wrapped, "MEMBERSHIP_MISSING"));
-  assert(!hasErrorCode(wrapped, "ALREADY_REDEEMED"));
+  assert(!hasErrorCode(wrapped, "REQUEST_ALREADY_APPROVED"));
   const cycle = new Error("Unrelated network error");
   cycle.cause = cycle;
   assert(!hasErrorCode(cycle, "MEMBERSHIP_MISSING"));
@@ -52,9 +52,9 @@ test("private proving inputs can only be sent to a loopback proof server", () =>
 });
 
 test("encrypted actor state survives reopening and isolates network, wallet and contract", async () => {
-  const dir = await mkdtemp(join(tmpdir(), "quietpass-vault-"));
+  const dir = await mkdtemp(join(tmpdir(), "matchproof-network-vault-"));
   const password = "Test-Only!Cedar7926";
-  const account = "undeployed:student:wallet-a";
+  const account = "undeployed:applicant:wallet-a";
   const address = "1".repeat(64);
   const provider = (accountId = account, pwd = password) =>
     levelPrivateStateProvider<typeof PRIVATE_ID, ActorState>({
@@ -67,7 +67,7 @@ test("encrypted actor state survives reopening and isolates network, wallet and 
   try {
     const initial = provider();
     initial.setContractAddress(address);
-    const state = createActor("student");
+    const state = createActor("applicant");
     await initial.set(PRIVATE_ID, state);
     const reopened = provider();
     reopened.setContractAddress(address);
@@ -80,9 +80,9 @@ test("encrypted actor state survives reopening and isolates network, wallet and 
     wrongPassword.setContractAddress(address);
     await assert.rejects(() => wrongPassword.get(PRIVATE_ID));
     for (const scope of [
-      "preprod:student:wallet-a",
+      "preprod:applicant:wallet-a",
       "undeployed:issuer:wallet-a",
-      "undeployed:student:wallet-b",
+      "undeployed:applicant:wallet-b",
     ]) {
       const other = provider(scope);
       other.setContractAddress(address);

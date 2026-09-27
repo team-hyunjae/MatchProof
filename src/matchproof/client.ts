@@ -14,7 +14,7 @@ import {
   ledger,
   type Ledger,
 } from "../../contracts/matchproof-managed/contract/index.js";
-import { assertLocalProver, endpoints } from "../network/client.ts";
+import { assertLocalProver, endpoints } from "./network.ts";
 import {
   compiledContract,
   createActor,
