@@ -35,7 +35,9 @@ Follow the [English demo guide](docs/matchproof-judge-guide.en.md) or [한국어
 
 - **Private eligibility checks:** Compact circuits verify credential membership, applicant key ownership and the income, marital-status and time conditions.
 - **Request binding and replay prevention:** Each proof binds to a deployment, applicant and review request. A request can receive only one approval.
-- **Independent verification:** A separate view reads confirmed approval records from the public indexer. A local UI flag does not establish success.
+- **Separate public read:** A separate view reads confirmed approval records from the public indexer. A local UI flag does not establish success.
+
+See the [architecture](docs/architecture.md) for data flows and [validation](docs/validation.md) for reproducible checks. The final [PowerPoint](docs/presentation/MatchProof-pitch.ko-en.pptx) and [English captions](docs/presentation/demo.en.srt) are also available.
 
 ## Run locally
 
@@ -73,7 +75,7 @@ Keep the terminal running. The demo stops 30 minutes after it becomes ready. Res
 - The development-chain integration run deployed a new contract, issued a credential, opened a request, confirmed a proof and verified the result through an independent public read.
 - Replay and insufficient-income cases failed during circuit execution before submission. Import checks rejected another applicant's credential and request files.
 
-[Public clone evidence](submission/evidence/2026-09-26-public-clone.json) · [Development-chain transaction evidence](submission/evidence/2026-09-26-matchproof-smoke.json)
+[Public clone evidence](docs/evidence/2026-09-26-public-clone.json) · [Development-chain transaction evidence](docs/evidence/2026-09-26-matchproof-smoke.json)
 
 These are historical verification records, not a guarantee that the recorded deployment is still available or its requests remain valid.
 
@@ -86,6 +88,6 @@ npm run build
 
 The prototype uses a mock issuer and synthetic evidence. It does not integrate government documents, real member authentication, matchmaking, chat or payments. The issuer establishes the evidence's truth. The proof checks that evidence against the policy and does not establish marital status after the evidence check date.
 
-The issuer and applicant know the evidence values, and the proof server processes private inputs. The agency does not receive the raw documents or exact income. Public commitments, policy, request identifiers, time bounds and approval records remain observable. If a request becomes linked to a person, it can reveal that they met the conditions. MatchProof does not claim complete anonymity or automatic legal compliance. Loopback endpoints may forward to a proof server on another machine through SSH.
+The issuer and applicant know the evidence values, and the proof server processes private inputs. The browser relies on the configured indexer; it does not independently authenticate its response using chain headers and inclusion proofs. The agency does not receive the raw documents or exact income. Public commitments, policy, request identifiers, time bounds and approval records remain observable. If a request becomes linked to a person, it can reveal that they met the conditions. MatchProof does not claim complete anonymity or automatic legal compliance. Loopback endpoints may forward to a proof server on another machine through SSH.
 
 **Ten-minute expiry limits the request's use. It does not delete chain history.** After expiry, the app displays Expired even when a historical approval exists. The current contract has no deletion or revocation function. Retention and erasure of off-chain files and any personal-data implications of public records require separate design for a production service.

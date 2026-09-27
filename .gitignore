@@ -20,3 +20,13 @@ public/matchproof-assets/
 public/matchproof-demo.json
 .network-test-state/
 logs/
+
+# Local-only planning, recording, and submission preparation
+/submission/
+/AGENTS.md
+/README-quietpass-archive.md
+/docs/team-plan.md
+/docs/matchproof-plan.md
+/docs/network-next.md
+/docs/verification.md
+/docs/matchproof-verification.md

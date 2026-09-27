@@ -1,67 +1,75 @@
-# QuietPass 설계
+# MatchProof architecture
 
-## 한 문장
+MatchProof checks marriage-agency eligibility using synthetic evidence on Midnight Local Devnet (`undeployed`). The issuer checks the evidence, the applicant consents to a proof, and the agency reads the confirmed result.
 
-학교가 확인한 지원 대상만 하루 한 번 식사를 이용하고, 가맹점에는 학생의 이름·학번·지원 사유를 공개하지 않는다.
+![Participants and information flow](diagrams/01-overview.png)
 
-한 프로그램 = 학교 1곳 + 제휴 식당 2곳. 실결제, 정산, 실명 인증 연동, 자격 갱신·철회, 키 복구는 이 체크포인트에 포함되지 않는다.
+## Components and trust boundaries
 
-## 실제 네트워크에서 지향하는 흐름
+| Component | Responsibility | Data it handles |
+| --- | --- | --- |
+| Mock issuer | Issue credentials after checking synthetic evidence | Exact evidence, applicant registration value, issuer secret |
+| Applicant browser | Store the credential, review disclosure and submit a proof | Credential, applicant secret, request nonce and local consent |
+| Agency browser | Register requests and read approvals | Applicant registration value, local reference, request nonce, agency secret and public results |
+| Proof server, off-chain | Generate the zero-knowledge proof | Private proof inputs |
+| Midnight contract, on-chain | Verify proof-bearing transactions and maintain public state | Policy, commitments, request time bounds and approvals |
+| Indexer, off-chain | Follow and serve public chain state | Public contract state |
 
-1. 학생 기기가 32바이트 무작위 비밀키 `s`를 생성한다.
-2. 학생은 `H(member-domain, program, s)`라는 commitment만 학교에 제출한다.
-3. 학교는 오프체인에서 자격과 중복 발급 여부를 확인하고, 발급기관 비밀키에 대한 소유 증명으로 `issue`를 호출한다.
-4. 학생 기기는 공개된 트리 전체를 동기화하여 자신의 Merkle 경로를 로컬에서 구한다. 인덱서에 특정 학생 leaf를 조회하면 연결 단서가 생길 수 있다.
-5. `redeem`은 비밀키로부터 만든 commitment가 경로의 leaf와 같은지, 경로의 root가 현재 자격 트리의 root인지 검증한다.
-6. `N = H(spend-domain, program, s, korean-day)`를 공개하고 미사용인지 확인한다. 가맹점은 이 계산에 포함되지 않으므로 식당 변경으로 사용 횟수를 늘릴 수 없다.
-7. `spent[N]`와 `receipts[N] = merchant`를 저장한다. 이름, 학번, 소득, 사유, 학생 비밀키는 저장하지 않는다.
+The agency does not receive the applicant credential or exact income. The issuer and applicant know the evidence, and the proof server processes private inputs. A loopback endpoint can be an SSH forward to another machine. The browser relies on the configured indexer and does not independently authenticate its responses using chain headers and inclusion proofs.
 
-`day = floor((unixSeconds + 32400) / 86400)`이며 회로는 블록 시각이 해당 한국 날짜의 시작 이상·다음 날 시작 미만인지 검사한다. 사용자가 내일 날짜로 새로운 nullifier를 만들어도 거절한다.
+## Credential issuance
 
-## 어디에 무엇이 있는가
+![Credential issuance](diagrams/02-issuance.png)
 
-| 데이터                                     | 실제 서비스에서의 위치 | 공개 여부                           |
-| ------------------------------------------ | ---------------------- | ----------------------------------- |
-| 이름·학번·자격 근거                        | 발급기관의 기존 시스템 | 학교만 알고 있음                    |
-| 학생 비밀키                                | 학생 기기              | 비공개 witness                      |
-| membership path                            | 학생 기기에서 계산     | 비공개 witness                      |
-| 프로그램 ID, issuer key hash, 가맹점 목록  | ledger                 | 공개                                |
-| 발급 commitment, Merkle tree, 등록 집합    | ledger                 | 공개. 신원 원본 없음                |
-| 사용 날짜, nullifier, 가맹점, 발급·사용 수 | ledger/거래            | 공개                                |
-| 사용자의 개인 사용 내역                    | 학생 기기              | 비공개. 공개 기록과의 대응관계 포함 |
+The applicant shares a public registration value derived from an applicant secret. The issuer's `issue` circuit checks the issuer secret against `issuerKeyHash`, commits to the credential and deployment's `programId`, and inserts the commitment into `credentials` and `registered`. The Merkle tree has capacity for 1,024 credentials.
 
-트리 깊이 10: 이 MVP의 발급 용량은 1,024개다. 새 자격이 발급되면 root가 바뀐다. 증명 중 root가 변경되어 실패하면 최신 트리를 읽고 재시도한다. 철회를 추가할 때 과거 root를 무조건 허용하지 않는다.
+The credential contains the holder commitment, a random salt, exact synthetic income, income year, marital-status flag, evidence check time and validity deadline. Only the commitment becomes a public ledger entry. After confirmation, the issuer delivers the credential JSON to the applicant. Import checks bind it to the applicant key and registered commitment.
 
-## 기존 시뮬레이터의 경계 (`/`)
+## Agency request
 
-현재 `QuietPassSimulator`는 실제 컴파일된 `Contract`와 공식 Compact runtime으로 상태 전이·assertion을 실행한다. 앱 API는 그 결과만 표시한다. 따라서 프론트엔드의 버튼 상태만으로 중복을 막는 모형은 아니다.
+![Agency review request](diagrams/03-request.png)
 
-그러나 **ZK proof를 만들거나 검증하지 않는다.** Node 서버 한 프로세스에 가상 발급기관·학생들의 비밀키를 모두 두고 실행한다. API 역할 선택은 시연용이며 인증·권한 분리가 아니다. `/api/state`는 가상 프로필을 노출하고 `/api/merchant-state`만 공개 필드로 제한한다. 실제 개인정보나 실제 패스를 이 서버로 보내면 안 된다.
+`openRequest` checks the agency secret. A public request identifier commits to the deployment's `programId`, applicant registration value and private request nonce. The contract records `requestedAt` and `expiresAt`, checks block-time bounds and permits a request window of at most 600 seconds. The application uses ten-minute requests.
 
-이 서버의 직렬 실행은 시연 중의 동시 사용을 차단한다. 실제 블록체인 동시 거래 충돌·최종 확정은 아직 검증하지 않았다. 브라우저별로 독립된 ledger를 사용하므로 서로 다른 브라우저를 실제 공유 네트워크처럼 시연하면 안 된다. 같은 브라우저 내 역할 전환으로 시연한다.
+The agency keeps the correspondence between its synthetic reference and the public request ID in its encrypted browser state. It sends the request JSON, including the nonce, to the applicant. The reference is not a real member-authentication system.
 
-## 신뢰 가정과 남은 한계
+## Consent and proof
 
-- **학교의 자격 심사를 신뢰한다.** ZK는 현실 자격의 진위를 알아내지 못한다. 실제 시스템은 동일 학생에게 여러 비밀키로 중복 발급하지 않도록 오프체인 통제를 해야 한다.
-- **비밀키 공유를 막지 못한다.** 패스는 키 소유 기반이다. 생체 인증이나 사람의 고유성을 증명하지 않는다.
-- **issuer가 임의 발급할 수 있다.** 발급 수는 공개되지만 잘못된 자격 발급의 정당성까지 체인이 보장하지 않는다. 학교 키 회전·접근 통제도 후속 작업이다.
-- **작은 익명 집합, 접속 IP, 지갑 식별자, 발급·사용 시각, 물리적 방문으로 연결될 수 있다.** ‘완전 익명’을 주장하지 않는다. 가맹점별 사용 기록은 의도적으로 공개된다.
-- **사용은 식사 제공 증명이 아니다.** 사용 기록은 학생의 승인된 claim을 보여준다. 식사가 실제 제공됐는지, 가맹점에 얼마를 정산할지는 별도 설계다.
-- **키 재사용 금지.** 프로그램마다 새 랜덤 비밀키를 생성하고 프로그램 ID도 배포마다 유일하게 만든다.
-- **발급 commitment는 공개다.** 증명 과정에서 이를 다시 공개하지 않도록 leaf 소유 검증과 root 검증을 모두 회로 내부에 둔다.
-- **프로그램 철회·종료가 없다.** 배포 전 유효 기간, 철회, 키 분실 정책을 정해야 한다.
+![Private proof inputs and chain transaction](diagrams/04-proof.png)
 
-## 검증 기준
+Explicit consent is an application requirement before proof submission. The `proveEligibility` circuit checks:
 
-발급기관 권한, 중복 발급, 회원 여부, 타인의 Merkle 경로, 위조 경로, 가맹점 allowlist, 과거/미래 날짜, 다른 식당 중복 사용, 자정 경계, 프로그램 간 nullifier 분리, 실패 시 상태 불변을 검사한다. API에서는 동시 재사용, 잘못된 입력, 외부 Origin, 세션 분리, 공개 응답의 개인정보 미포함을 검사한다.
+- the credential's Merkle membership and holder-secret ownership;
+- the request binding to this program, applicant and nonce;
+- the configured income year and minimum income;
+- not being married on the evidence check date;
+- evidence checked no later than the request start and valid/fresh through the request deadline;
+- block-time validity and absence of an earlier approval for the same request.
 
+The demonstration policy is 2025 income of at least KRW 50 million and evidence no older than seven days through the request deadline. The circuit writes `approvals[requestId] = expiresAt` only when all checks pass. The app displays success after `callTx` returns a confirmed transaction.
 
-## 실제 네트워크 클라이언트 (`/network`, 2026-09-20)
+The official test-wallet adapter used by `npm run demo` signs development transactions automatically. It does not display a wallet extension's approval prompt. JSON files are a manual prototype delivery mechanism, not a production credential transport.
 
-`src/network`가 실제 Midnight provider를 사용한다. 개인 상태는 공식 encrypted Level provider(브라우저 IndexedDB)로 저장하며 네트워크·역할·지갑·배포 주소별로 분리한다. 암호는 메모리에만 있고 서버에 전달하지 않는다. 학교의 비밀과 학생의 비밀은 서로 다른 상태에 있으며 witness는 역할을 검사한다.
+## Public result
 
-학생 기기는 전체 공개 ledger에서 Merkle 경로를 계산한다. witness는 학생 기기의 loopback 증명 서버로 전송되므로 '브라우저 밖으로 전혀 나가지 않는다'고 표현하지 않는다. '학생 기기를 벗어나 학교/외부 증명 서버로 보내지 않는다'가 의도하는 경계다.
+![Public-state queries through the off-chain indexer](diagrams/05-public-read.png)
 
-학교는 모의 학생 ID마다 commitment 예약을 암호화 상태에 저장한 뒤 발급한다. 거래가 불확실하게 실패해도 다른 commitment를 새로 발급하지 않는다. 이 통제는 한 학교 브라우저의 시연 범위이며 운영용 인증·명부 DB는 아니다.
+The agency or judge queries the same deployment through the indexer without applicant files or a connected wallet. No successful approval appears for a failed proof. The agency's Pending status does not distinguish an unprocessed request from an unsuccessful attempt.
 
-식당은 학생 API나 학생 지갑을 사용하지 않고 공개 인덱서로 같은 컨트랙트를 조회한다. 실제 `callTx`가 확정을 반환하기 전에는 사용 승인으로 표시하지 않는다. 검증 증거와 한계는 `verification.md`를 따른다.
+Public state includes `programId`, issuer and agency key hashes, policy values, credential commitments and Merkle state, request identifiers and time bounds, and approvals. Transaction metadata is also observable. Private witness values are not public ledger fields. An approval can reveal policy satisfaction if the request is linked to a person.
+
+## Expiry and limitations
+
+Expiry prevents a new proof for that request and changes the UI to Expired. It does not delete historical requests or approvals. The contract has no deletion or immediate-revocation circuit.
+
+Real-document truth depends on the issuer. The prototype does not integrate government records, real member authentication, person-uniqueness checks or vault-loss recovery. It does not prove current marital status after the check date, complete anonymity or automatic compliance with privacy law.
+
+## Implementation
+
+- [Compact contract](../contracts/matchproof.compact)
+- [Client and provider integration](../src/matchproof/client.ts)
+- [Private-state model and file validation](../src/matchproof/model.ts)
+- [Development services](../infra/compose.yml)
+- [Validation and reproducible checks](validation.md)
+
+Dashed arrows in the diagrams are off-chain transfers, including both public registration values and private files. Green arrows are chain transactions; blue arrows are public reads. The diagrams omit setup, fees and detailed signing order.

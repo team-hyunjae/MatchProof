@@ -56,7 +56,7 @@ Credential JSON contains exact synthetic evidence and an issuance salt. Request 
 
 For the insufficient-income demonstration, issue the **2025년 3,000만 원 · 소득 조건 미충족** fixture (2025 income KRW 30 million). Import that credential, create a new unused request and attempt a proof within its deadline. The applicant sees the failure reason. The agency's new request stays Pending, and its approval count does not increase.
 
-Without consent, the proof button stays disabled. An already-approved request cannot receive another approval. An expired request requires a new request. These are different checks: a disabled UI button alone does not establish contract enforcement. The [integration evidence](../submission/evidence/2026-09-26-matchproof-smoke.json) records replay and insufficient-income rejection before submission. It does not claim failed transactions were included in blocks.
+Without consent, the proof button stays disabled. An already-approved request cannot receive another approval. An expired request requires a new request. These are different checks: a disabled UI button alone does not establish contract enforcement. The [integration evidence](evidence/2026-09-26-matchproof-smoke.json) records replay and insufficient-income rejection before submission. It does not claim failed transactions were included in blocks.
 
 **Expiry does not erase history.** Public requests and approvals remain on the chain. The current contract has no deletion or revocation function.
 
