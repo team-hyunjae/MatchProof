@@ -2,7 +2,7 @@
 
 목표 길이 4분 30초. 공식 영상 길이 제한이 아니라 자체 촬영 계획이다. 앱 화면은 한국어로 유지하고 한국어로 설명하며 영어 자막을 추가한다.
 
-**이 문서는 촬영 전 구성 초안이다.** 2026-09-26 제작한 4분 30초 무음 편집본의 녹음에는 [장면별 한국어 대본](voiceover-ko.md)과 [화면 기준 영어 SRT](demo-subtitles.en.picture-draft.srt)를 사용한다. 아래 시간표와 [기존 SRT](demo-subtitles.en.draft.srt)는 참고용으로 보존한다. 한국어 음성 결합·최종 자막 검수·업로드는 아직 완료하지 않았다.
+**이 문서는 촬영 전 구성 초안이다.** 2026-09-27에는 [장면별 한국어 녹음](voiceover-ko.md)과 [최종 영어 SRT](demo-subtitles.en.srt)를 결합한 4분 52초 영상을 완성했다. [파일 안내](video-delivery.md). 아래 시간표와 [기존 SRT](demo-subtitles.en.draft.srt)는 참고용이다. 업로드와 최종 제출은 아직 수행하지 않았다.
 
 촬영 방법과 화면 순서는 [촬영 가이드](recording-guide.md), 단계별 설명 그림은 [영상용 PNG](diagrams/README.md)를 참고한다.
 
