@@ -8,7 +8,9 @@ Repository / 저장소: [team-hyunjae/MatchProof](https://github.com/team-hyunja
 
 Network / 네트워크: Midnight Local Devnet (`undeployed`)
 
-Demo video / 시연 영상: 촬영·공개 링크 준비 전 / Recording and shareable link pending
+Project Deck / 발표 자료: Google Slides 링크 준비 중. 제출 폼은 Google Slides 링크를 요구함.
+
+Demo video / 시연 영상: 2분 57초 편집 완료, 공개 링크 준비 중 / 2:57 edit complete; shareable link pending. [파일 안내](video-delivery.md).
 
 아래 한국어·영어 설명은 같은 구현 범위를 설명한다. 폼의 실제 글자 수 제한과 필수 항목에 맞춰 해당 언어의 내용을 사용한다. 이 문서는 제출 완료 기록이 아니다.
 
