@@ -54,7 +54,7 @@
 - [x] 사용자가 공유한 폼 항목 확인: Project Overview, Midnight Implementation, Google Slides Deck, Demo Video Link.
 - [x] 발표 자료를 [Google Slides 11장](https://docs.google.com/presentation/d/1VJEq6m6tI9KfbuZDTHvcM2DCBi2k7dvJ2QQAED4eHsY/edit?usp=drivesdk)으로 변환하고 문구·배치 확인.
 - [x] [제출 폼용 한국어 답변](form-answers.ko.md) 작성.
-- [ ] Google Slides 심사위원 열람 권한 확인: 링크가 있는 모든 사용자 · 뷰어. 현재 브라우저 로그인 대기.
+- [ ] Google Slides 심사위원 열람 권한 확인: 현재 특정 계정에만 공유됨. 링크가 있는 모든 사용자 · 뷰어 설정 대기.
 - [ ] 최종 영상 업로드·로그인 없는 재생 확인 및 제출 설명에 URL 반영.
 - [ ] 최종 제출 폼에서 언어·분량·연락처 등 필수 항목 확인.
 

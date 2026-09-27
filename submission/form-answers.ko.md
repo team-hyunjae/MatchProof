@@ -40,4 +40,4 @@ https://docs.google.com/presentation/d/1VJEq6m6tI9KfbuZDTHvcM2DCBi2k7dvJ2QQAED4e
 ## 링크 상태
 
 - Google Slides 변환 및 11장 문구·배치 확인 완료.
-- 심사위원 열람 권한 설정 대기: 현재 소유자 전용. 브라우저 로그인 후 ‘링크가 있는 모든 사용자 · 뷰어’로 설정해야 한다.
+- 심사위원 열람 권한 설정 대기: 현재 특정 계정에만 공유됨. 제출 전 ‘링크가 있는 모든 사용자 · 뷰어’ 설정을 확인해야 한다.
